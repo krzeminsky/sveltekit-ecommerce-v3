@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>some ecommerce site</title>
+    <title>Home</title>
 </svelte:head>
 
 <div class="w-full h-screen grid place-content-center gap-4 text-center">
