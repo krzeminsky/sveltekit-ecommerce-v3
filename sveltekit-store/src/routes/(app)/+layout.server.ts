@@ -1,3 +1,3 @@
 export const load = async () => {
-    return { user: 1 }
+    return { user: null }
 }

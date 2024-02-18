@@ -8,34 +8,32 @@
 
     export let data: LayoutData;
 
-    const { elements: { trigger, menu, item, separator }, states: { open } } = createDropdownMenu({ forceVisible: true });
+    const { elements: { trigger, menu, item, separator }, states: { open } } = createDropdownMenu({ forceVisible: true, loop: true });
 </script>
 
-<div class="fixed top-0 left-0 w-full h-14 shadow-md bg-gray-50 z-50 flex items-center justify-between">
+<div class="fixed top-0 left-0 w-full h-14 shadow-md bg-gray-50 z-10 flex items-center justify-between">
     <div/>
     
     <input type="search" placeholder="Search" class="mx-4 h-12 rounded-full bg-white px-4 border-2 border-gray-100 outline-none focus:outline-none focus:border-gray-300 transition-all min-w-0 max-w-96 flex-1 basis-0" />
     
     <div class="mr-4 flex gap-2">
-        <a href="/shopping-bag">
+        <a href="/shopping-bag" tabindex="-1">
             <IconButton label="Shopping bag" src={ShoppingBagIcon} alt="Shopping bag" />
         </a>
         
-        <div use:melt={$trigger}>
-            <IconButton label="Account actions" src={AccountIcon} alt="Account actions" />
-        </div>
+        <IconButton label="Account actions" src={AccountIcon} alt="Account actions" element={trigger} />
     </div>
 </div>
 
 {#if $open}
-<div id="menu" class="p-2 bg-white z-10 origin-top-right shadow-md rounded-lg flex flex-col gap-1" use:melt={$menu} transition:fadeScale={{}}>
+<div id="menu" class="p-2 bg-white z-20 origin-top-right shadow-md rounded-lg flex flex-col gap-1" use:melt={$menu} transition:fadeScale={{}}>
     {#if data.user}
     <a href="/account" class="menu-item" use:melt={$item}>Account</a>
     <a href="/dashboard" class="menu-item" use:melt={$item}>Dashboard</a>
     <div class="bg-gray-500 h-[1px]" use:melt={$separator}/>
-    <a href="/logout" class="menu-item">Logout</a>
+    <a href="/logout" class="menu-item" use:melt={$item}>Logout</a>
     {:else}
-    <a href="/login" class="menu-item">Log in</a>
+    <a href="/login" class="menu-item" use:melt={$item}>Log in</a>
     {/if}
 </div>
 {/if}
